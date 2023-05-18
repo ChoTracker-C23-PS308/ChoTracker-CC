@@ -9,9 +9,13 @@ import (
 )
 
 type Querier interface {
+	CreateArticle(ctx context.Context, arg CreateArticleParams) (string, error)
 	CreateUser(ctx context.Context, arg CreateUserParams) (string, error)
+	DeleteArticle(ctx context.Context, id string) error
 	DeleteUser(ctx context.Context, id string) error
+	GetArticle(ctx context.Context, id string) (Article, error)
 	GetUser(ctx context.Context, id string) (User, error)
+	UpdateArticle(ctx context.Context, arg UpdateArticleParams) (string, error)
 	UpdateUser(ctx context.Context, arg UpdateUserParams) (string, error)
 }
 

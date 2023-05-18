@@ -23,8 +23,8 @@ VALUES ($1, $2, $3, $4, $5, $6)
 -- name: UpdateArticle :one
 UPDATE articles
 SET author_id        = $2
-  , judul_artikel    = $3
-  , isi_artikel      = $4
+  , judul_article    = $3
+  , isi_article      = $4
   , author           = $5
   , image_url        = $6
   , updated_at   = CURRENT_TIMESTAMP

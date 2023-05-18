@@ -8,11 +8,12 @@ import (
 	"time"
 )
 
+
 type Article struct {
 	ID           string    `db:"id"`
 	AuthorID     string    `db:"author_id"`
-	JudulArtikel string    `db:"judul_artikel"`
-	IsiArtikel   string    `db:"isi_artikel"`
+	JudulArticle string    `db:"judul_article"`
+	IsiArticle   string    `db:"isi_article"`
 	Author       string    `db:"author"`
 	ImageUrl     string    `db:"image_url"`
 	CreatedAt    time.Time `db:"created_at"`

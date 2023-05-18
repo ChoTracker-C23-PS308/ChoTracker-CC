@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db:
+    image: bitnami/postgresql:14
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+      - POSTGRESQL_DATABASE=dev_database
+      - DATABASE_URL=postgres://dev_user:dev_password@db:5432/dev_database?sslmode=disable
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local

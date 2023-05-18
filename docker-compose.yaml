@@ -1,0 +1,26 @@
+version: "3"
+services:
+  web:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "4001:4001"
+    volumes:
+      - ./configs/var:/var/mangjek-be
+    env_file:
+      - .env.local
+    environment:
+      - DATABASE_URL=postgres://dev_user:dev_password@db:5432/dev_database?sslmode=disable
+    links:
+      - db
+  db:
+    image: bitnami/postgresql:14
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRESQL_USERNAME=dev_user
+      - POSTGRESQL_PASSWORD=dev_password
+      - POSTGRESQL_DATABASE=dev_database

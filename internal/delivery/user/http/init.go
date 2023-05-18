@@ -30,7 +30,6 @@ func NewHTTPUserDelivery(g *gin.RouterGroup, userRepo uRepo.Repository, fauth *a
 
 	g.POST("/users", httpCommon.Auth(fauth), h.addUser)
 	g.PUT("/users/:id", httpCommon.Auth(fauth), h.updateUser)
-	//g.GET("/users/history/:id", httpCommon.Auth(fAuth), h.getUserHistory)
 
 	return h
 }

@@ -9,7 +9,8 @@ type (
 	}
 
 	Response struct {
-		Data any `json:"data"`
+		Data    any `json:"data"`
+		Message string
 	}
 
 	User struct {
@@ -23,47 +24,37 @@ type (
 	}
 	AddUser struct {
 		ID        string `json:"id" binding:"required"`
-		Email     string `json:"email" binding:"required,email,contains=@student.unsri.ac.id"`
+		Email     string `json:"email" binding:"required"`
 		Name      string `json:"name" binding:"required"`
 		BirthDate string `json:"birth_date" binding:"required"`
 		Gender    string `json:"gender" binding:"required"`
 		ImageUrl  string `json:"image_url" binding:"required"`
+	}
+	AddArticle struct {
+		ID           string    `json:"id" binding:"required"`
+		AuthorID     string    `json:"author_id" binding:"required"`
+		JudulArtikel string    `json:"judul_artikel" binding:"required"`
+		IsiArtikel   string    `json:"isi_artikel" binding:"required"`
+		Author       string    `json:"author" binding:"required"`
+		ImageURL     string    `json:"image_url" binding:"required"`
+		CreatedAt    time.Time `json:"created_at"`
+		UpdatedAt    time.Time `json:"updated_at"`
 	}
 	UpdateUser struct {
 		ID        string `json:"id" binding:"required"`
-		Email     string `json:"email" binding:"required,email,contains=@student.unsri.ac.id"`
+		Email     string `json:"email" binding:"required"`
 		Name      string `json:"name" binding:"required"`
 		BirthDate string `json:"birth_date" binding:"required"`
 		Gender    string `json:"gender" binding:"required"`
 		ImageUrl  string `json:"image_url" binding:"required"`
 	}
-	Driver struct {
-		Name         string `json:"name"`
-		PoliceNumber string `json:"police_number"`
-		VehicleModel string `json:"vehicle_model"`
-		VehicleType  string `json:"vehicle_type"`
-	}
-	Inquiry struct {
-		Price    int64  `json:"price"`
-		Distance int32  `json:"distance"`
-		Duration int32  `json:"duration"`
-		OAddress string `json:"o_address"`
-		DAddress string `json:"d_address"`
-	}
-	Payment struct {
-		Amount   float64 `json:"amount"`
-		Status   string  `json:"status"`
-		Method   string  `json:"method"`
-		QrString string  `json:"qr_string"`
-	}
-	getOrder struct {
-		ID           string    `json:"id"`
-		UName        string    `json:"u_name"`
-		Driver       Driver    `json:"driver"`
-		OrderInquiry Inquiry   `json:"order_inquiry"`
-		Payment      Payment   `json:"payment"`
-		Status       string    `json:"status"`
-		CreatedAt    time.Time `json:"created_at"`
+	UpdateArticle struct {
+		ID           string    `json:"id" binding:"required"`
+		AuthorID     string    `json:"author_id" binding:"required"`
+		JudulArtikel string    `json:"judul_artikel" binding:"required"`
+		IsiArtikel   string    `json:"isi_artikel" binding:"required"`
+		Author       string    `json:"author" binding:"required"`
+		ImageURL     string    `json:"image_url" binding:"required"`
 		UpdatedAt    time.Time `json:"updated_at"`
 	}
 )

@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
-
+	aDelivery "github.com/ChoTracker-C23-PS308/ChoTracker-CC/internal/delivery/article/http"
 	uDelivery "github.com/ChoTracker-C23-PS308/ChoTracker-CC/internal/delivery/user/http"
+	aRepo "github.com/ChoTracker-C23-PS308/ChoTracker-CC/internal/repository/article/pg"
 	uRepo "github.com/ChoTracker-C23-PS308/ChoTracker-CC/internal/repository/user/pg"
 	"github.com/gin-gonic/gin"
+	"log"
 
 	cfg "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/config"
 	firebaseCommon "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/firebase/admin"
@@ -48,6 +49,9 @@ func main() {
 
 	ur := uRepo.NewPGUserRepository(store.Querier)
 	uDelivery.NewHTTPUserDelivery(api, ur, fAuth)
+
+	ar := aRepo.NewPGArticleRepository(store.Querier)
+	aDelivery.NewHTTPArticleDelivery(api, ar, fAuth)
 
 	log.Fatal(h.Router.Run(fmt.Sprintf(":%d", 4001)))
 

@@ -1,12 +1,10 @@
 CREATE TABLE IF NOT EXISTS articles (
     id VARCHAR(150) PRIMARY KEY,
-    author_id VARCHAR(150) REFERENCES users (id) UNIQUE NOT NULL,
+    author_id VARCHAR(150) REFERENCES users (id) NOT NULL,
     judul_article VARCHAR(255) NOT NULL,
     isi_article TEXT NOT NULL,
     author VARCHAR(255) NOT NULL,
     image_url VARCHAR(255) NOT NULL,
-
-
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

@@ -21,12 +21,12 @@ VALUES ($1, $2, $3, $4, $5, $6)
 `
 
 type CreateArticleParams struct {
-	ID           string `db:"id"`
-	AuthorID     string `db:"author_id"`
-	JudulArticle string `db:"judul_article"`
-	IsiArticle   string `db:"isi_article"`
-	Author       string `db:"author"`
-	ImageUrl     string `db:"image_url"`
+	ID           string 	`db:"id"`
+	AuthorID     string 	`db:"author_id"`
+	JudulArticle string 	`db:"judul_article"`
+	IsiArticle   string 	`db:"isi_article"`
+	Author       string 	`db:"author"`
+	ImageUrl     string 	`db:"image_url"`
 }
 
 func (q *Queries) CreateArticle(ctx context.Context, arg CreateArticleParams) (string, error) {
@@ -90,7 +90,7 @@ SET author_id        = $2
   , isi_article      = $4
   , author           = $5
   , image_url        = $6
-  , updated_at   = CURRENT_TIMESTAMP
+  , updated_at   	 = CURRENT_TIMESTAMP
 WHERE id = $1
     RETURNING id
 `

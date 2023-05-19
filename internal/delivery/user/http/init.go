@@ -12,25 +12,12 @@ type HTTPUserDelivery struct {
 	userRepo uRepo.Repository
 }
 
-//func NewHTTPUserDelivery(g *gin.RouterGroup, userUCase uUCase.Usecase, fAuth *auth.Client) HTTPUserDelivery {
-//	h := HTTPUserDelivery{userUCase: userUCase}
-//
-//	g.GET("/users/:id", httpCommon.Auth(fAuth), h.getUser)
-//	//g.POST("/users", httpCommon.Auth(fAuth), h.addUser)
-//	//g.PUT("/users/:id", httpCommon.Auth(fAuth), h.updateUser)
-//	//g.GET("/users/history/:id", httpCommon.Auth(fAuth), h.getUserHistory)
-//
-//	return h
-//}
-
 func NewHTTPUserDelivery(g *gin.RouterGroup, userRepo uRepo.Repository, fauth *auth.Client) HTTPUserDelivery {
 	h := HTTPUserDelivery{userRepo: userRepo}
 
 	g.GET("/users/:id", httpCommon.Auth(fauth), h.getUser)
-
 	g.POST("/users", httpCommon.Auth(fauth), h.addUser)
 	g.PUT("/users/:id", httpCommon.Auth(fauth), h.updateUser)
-	//g.GET("/users/history/:id", httpCommon.Auth(fAuth), h.getUserHistory)
 
 	return h
 }

@@ -45,6 +45,7 @@ func (r pgUserRepository) CreateUser(ctx context.Context, arg uModel.AddUser, au
 		return "", ErrCreateUser_UserExist
 	}
 
+	//id, err := r.querier.CreateUser(ctx, sqlc.CreateUserParams(arg))
 	id, err := r.querier.CreateUser(ctx, sqlc.CreateUserParams(arg))
 	if err == pgx.ErrNoRows {
 		return "", errorCommon.NewNotFoundError("User not found")

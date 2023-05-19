@@ -9,7 +9,8 @@ type (
 	}
 
 	Response struct {
-		Data any `json:"data"`
+		Data    any    `json:"data"`
+		Message string `json:"message"`
 	}
 
 	User struct {
@@ -23,18 +24,40 @@ type (
 	}
 	AddUser struct {
 		ID        string `json:"id" binding:"required"`
-		Email     string `json:"email" binding:"required,email,contains=@student.unsri.ac.id"`
+		Email     string `json:"email" binding:"required"`
 		Name      string `json:"name" binding:"required"`
 		BirthDate string `json:"birth_date" binding:"required"`
 		Gender    string `json:"gender" binding:"required"`
 		ImageUrl  string `json:"image_url" binding:"required"`
 	}
+
 	UpdateUser struct {
 		ID        string `json:"id" binding:"required"`
-		Email     string `json:"email" binding:"required,email,contains=@student.unsri.ac.id"`
+		Email     string `json:"email" binding:"required"`
 		Name      string `json:"name" binding:"required"`
 		BirthDate string `json:"birth_date" binding:"required"`
 		Gender    string `json:"gender" binding:"required"`
 		ImageUrl  string `json:"image_url" binding:"required"`
+	}
+
+	AddArticle struct {
+		ID           string    `json:"id" binding:"required"`
+		AuthorID     string    `json:"author_id" binding:"required"`
+		JudulArtikel string    `json:"judul_artikel" binding:"required"`
+		IsiArtikel   string    `json:"isi_artikel" binding:"required"`
+		Author       string    `json:"author" binding:"required"`
+		ImageURL     string    `json:"image_url" binding:"required"`
+		CreatedAt    time.Time `json:"created_at"`
+		UpdatedAt    time.Time `json:"updated_at"`
+	}
+
+	UpdateArticle struct {
+		ID           string    `json:"id" binding:"required"`
+		AuthorID     string    `json:"author_id" binding:"required"`
+		JudulArtikel string    `json:"judul_artikel" binding:"required"`
+		IsiArtikel   string    `json:"isi_artikel" binding:"required"`
+		Author       string    `json:"author" binding:"required"`
+		ImageURL     string    `json:"image_url" binding:"required"`
+		UpdatedAt    time.Time `json:"updated_at"`
 	}
 )

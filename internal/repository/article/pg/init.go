@@ -45,6 +45,14 @@ func (r pgArticleRepository) GetArticle(ctx context.Context, id string, au aMode
 	return aModel.Article(art), err
 }
 
+func (r pgArticleRepository) DeleteArticle(ctx context.Context, id string, au aModel.AuthArticle) error {
+	err := r.querier.DeleteArticle(ctx, id)
+	if err == pgx.ErrNoRows {
+		return errorCommon.NewNotFoundError("Article not found")
+	}
+	return err
+}
+
 func NewPGArticleRepository(querier sqlc.Querier) pgArticleRepository {
 	return pgArticleRepository{querier: querier}
 }

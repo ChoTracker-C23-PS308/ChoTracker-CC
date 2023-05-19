@@ -17,6 +17,7 @@ func NewHTTPArticleDelivery(g *gin.RouterGroup, articleRepo aRepo.Repository, fa
 	g.GET("/articles/:id", httpCommon.Auth(fauth), h.getArticle)
 	g.POST("/articles", httpCommon.Auth(fauth), h.addArticle)
 	g.PUT("/articles/:id", httpCommon.Auth(fauth), h.updateArticle)
+	g.DELETE("/articles/:id", httpCommon.Auth(fauth), h.deleteArticle)
 
 	return h
 }

@@ -7,7 +7,6 @@ package sqlc
 
 import (
 	"context"
-	"time"
 )
 
 const createArticle = `-- name: CreateArticle :one
@@ -16,10 +15,8 @@ INSERT INTO articles ( id
                      , judul_article
                      , isi_article
                      , author
-                     , image_url
-					 , created_at
-					 , updated_at)
-VALUES ($1, $2, $3, $4, $5, $6, &7, &8)
+                     , image_url)
+VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING id
 `
 
@@ -30,8 +27,6 @@ type CreateArticleParams struct {
 	IsiArticle   string 	`db:"isi_article"`
 	Author       string 	`db:"author"`
 	ImageUrl     string 	`db:"image_url"`
-	CreatedAt 	time.Time 	`db:"created_at"`
-	UpdatedAt 	time.Time 	`db:"updated_at"`
 }
 
 func (q *Queries) CreateArticle(ctx context.Context, arg CreateArticleParams) (string, error) {
@@ -42,8 +37,6 @@ func (q *Queries) CreateArticle(ctx context.Context, arg CreateArticleParams) (s
 		arg.IsiArticle,
 		arg.Author,
 		arg.ImageUrl,
-		arg.CreatedAt,
-		arg.UpdatedAt,
 	)
 	var id string
 	err := row.Scan(&id)
@@ -97,7 +90,7 @@ SET author_id        = $2
   , isi_article      = $4
   , author           = $5
   , image_url        = $6
-  , updated_at   = CURRENT_TIMESTAMP
+  , updated_at   	 = CURRENT_TIMESTAMP
 WHERE id = $1
     RETURNING id
 `

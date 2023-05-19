@@ -24,8 +24,6 @@ type (
 		IsiArticle   string
 		Author       string
 		ImageUrl     string
-		CreatedAt    time.Time
-		UpdatedAt    time.Time
 	}
 	UpdateArticle struct {
 		ID           string

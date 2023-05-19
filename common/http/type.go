@@ -9,7 +9,8 @@ type (
 	}
 
 	Response struct {
-		Data any `json:"data"`
+		Data    any `json:"data"`
+		Message string
 	}
 
 	User struct {
@@ -23,7 +24,7 @@ type (
 	}
 	AddUser struct {
 		ID        string `json:"id" binding:"required"`
-		Email     string `json:"email" binding:"required,email,contains=@student.unsri.ac.id"`
+		Email     string `json:"email" binding:"required"`
 		Name      string `json:"name" binding:"required"`
 		BirthDate string `json:"birth_date" binding:"required"`
 		Gender    string `json:"gender" binding:"required"`
@@ -41,7 +42,7 @@ type (
 	}
 	UpdateUser struct {
 		ID        string `json:"id" binding:"required"`
-		Email     string `json:"email" binding:"required,email,contains=@student.unsri.ac.id"`
+		Email     string `json:"email" binding:"required"`
 		Name      string `json:"name" binding:"required"`
 		BirthDate string `json:"birth_date" binding:"required"`
 		Gender    string `json:"gender" binding:"required"`

@@ -8,7 +8,6 @@ import (
 	"time"
 )
 
-
 type Article struct {
 	ID           string    `db:"id"`
 	AuthorID     string    `db:"author_id"`
@@ -18,6 +17,16 @@ type Article struct {
 	ImageUrl     string    `db:"image_url"`
 	CreatedAt    time.Time `db:"created_at"`
 	UpdatedAt    time.Time `db:"updated_at"`
+}
+
+type History struct {
+	ID             string    `db:"id"`
+	Uid            string    `db:"uid"`
+	TotalKolestrol string    `db:"total_kolestrol"`
+	Tingkat        string    `db:"tingkat"`
+	ImageUrl       string    `db:"image_url"`
+	CreatedAt      time.Time `db:"created_at"`
+	UpdatedAt      time.Time `db:"updated_at"`
 }
 
 type User struct {

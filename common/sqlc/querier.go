@@ -10,12 +10,16 @@ import (
 
 type Querier interface {
 	CreateArticle(ctx context.Context, arg CreateArticleParams) (string, error)
+	CreateHistory(ctx context.Context, arg CreateHistoryParams) (string, error)
 	CreateUser(ctx context.Context, arg CreateUserParams) (string, error)
 	DeleteArticle(ctx context.Context, id string) error
+	DeleteHistory(ctx context.Context, id string) error
 	DeleteUser(ctx context.Context, id string) error
 	GetArticle(ctx context.Context, id string) (Article, error)
+	GetHistory(ctx context.Context, uid string) ([]GetHistoryRow, error)
 	GetUser(ctx context.Context, id string) (User, error)
 	UpdateArticle(ctx context.Context, arg UpdateArticleParams) (string, error)
+	UpdateHistory(ctx context.Context, arg UpdateHistoryParams) (string, error)
 	UpdateUser(ctx context.Context, arg UpdateUserParams) (string, error)
 }
 

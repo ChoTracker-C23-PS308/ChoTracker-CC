@@ -61,7 +61,7 @@ func (r pgUserRepository) CreateUser(ctx context.Context, arg uModel.AddUser, au
 //		}
 //		return err
 //	}
-//
+
 // GetUser implements user.User
 func (r pgUserRepository) GetUser(ctx context.Context, id string, au uModel.AuthUser) (uModel.User, error) {
 	if !au.IsSame(id) {
@@ -181,12 +181,3 @@ func NewPGUserRepository(querier sqlc.Querier) pgUserRepository {
 //	}
 //
 //	return []oModel.Order(oh), err
-//
-//	//{
-//	//	"id" : 1,
-//	//	"address" : "Gang Buntu",
-//	//	"status" : "Sedang diperjalanan",
-//	//	"update_at" : "2023-02-10T13:45:00.000Z"
-//	//
-//	//}
-//}

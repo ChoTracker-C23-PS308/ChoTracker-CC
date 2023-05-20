@@ -21,7 +21,7 @@ func (d HTTPArtikelDelivery) deleteArticle(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, httpCommon.Response{
-		Message: "Article deleted successfully",
+		Message: "Article successfully deleted",
 	})
 }
 
@@ -50,10 +50,9 @@ func (d HTTPArtikelDelivery) updateArticle(c *gin.Context) {
 		c.Error(err)
 		return
 	}
-
 	c.JSON(http.StatusOK, httpCommon.Response{
 		Data:    nid,
-		Message: "Data has been updated",
+		Message: "Data successfully updated",
 	})
 }
 
@@ -81,8 +80,20 @@ func (d HTTPArtikelDelivery) addArticle(c *gin.Context) {
 	}
 	c.JSON(http.StatusCreated, httpCommon.Response{
 		Data:    nid,
-		Message: "Data has been created",
+		Message: "Data successfully created",
 	})
+}
+
+func (d HTTPArtikelDelivery) getAllArticles(c *gin.Context) {
+	context := c.Request.Context()
+	au := c.MustGet(httpCommon.AUTH_USER).(uModel.AuthUser)
+
+	u, err := d.articleRepo.GetAllArticles(context, aModel.AuthArticle(au))
+	if err != nil {
+		c.Error(err)
+		return
+	}
+	c.JSON(http.StatusOK, httpCommon.Response{Data: u})
 }
 
 func (d HTTPArtikelDelivery) getArticle(c *gin.Context) {

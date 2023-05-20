@@ -7,6 +7,7 @@ type (
 		ID   string
 		Role uint32
 	}
+
 	Article struct {
 		ID           string
 		AuthorID     string
@@ -17,6 +18,7 @@ type (
 		CreatedAt    time.Time
 		UpdatedAt    time.Time
 	}
+
 	AddArticle struct {
 		ID           string
 		AuthorID     string

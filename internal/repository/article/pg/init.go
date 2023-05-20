@@ -37,6 +37,18 @@ func (r pgArticleRepository) CreateArticle(ctx context.Context, arg aModel.AddAr
 	return id, err
 }
 
+func (r pgArticleRepository) GetAllArticles(ctx context.Context, au aModel.AuthArticle) ([]aModel.Article, error) {
+	art, err := r.querier.GetAllArticles(ctx)
+	if err != nil {
+		return nil, err
+	}
+	result := make([]aModel.Article, len(art))
+	for i, article := range art {
+		result[i] = aModel.Article(article)
+	}
+	return result, nil
+}
+
 func (r pgArticleRepository) GetArticle(ctx context.Context, id string, au aModel.AuthArticle) (aModel.Article, error) {
 	art, err := r.querier.GetArticle(ctx, id)
 	if err == pgx.ErrNoRows {

@@ -16,6 +16,7 @@ type Querier interface {
 	DeleteHistory(ctx context.Context, id string) error
 	DeleteUser(ctx context.Context, id string) error
 	GetArticle(ctx context.Context, id string) (Article, error)
+	GetAllArticles(ctx context.Context)([]Article, error)
 	GetHistory(ctx context.Context, uid string) ([]GetHistoryRow, error)
 	GetUser(ctx context.Context, id string) (User, error)
 	UpdateArticle(ctx context.Context, arg UpdateArticleParams) (string, error)

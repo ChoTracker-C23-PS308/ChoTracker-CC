@@ -17,7 +17,6 @@ type (
 		BirthDate string
 		Gender    string
 		ImageUrl  string
-
 		CreatedAt time.Time
 		UpdatedAt time.Time
 	}

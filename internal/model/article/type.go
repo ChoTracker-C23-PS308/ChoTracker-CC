@@ -7,6 +7,7 @@ type (
 		ID   string
 		Role uint32
 	}
+
 	Article struct {
 		ID           string
 		AuthorID     string

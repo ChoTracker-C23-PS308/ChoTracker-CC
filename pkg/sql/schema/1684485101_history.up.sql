@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS history (
     id VARCHAR(150) PRIMARY KEY,
-    uid VARCHAR(150) REFERENCES users (id) UNIQUE NOT NULL,
+    uid VARCHAR(150) REFERENCES users (id) NOT NULL,
     total_kolestrol VARCHAR(255) NOT NULL,
     tingkat VARCHAR(255) NOT NULL,
     image_url VARCHAR(255) NOT NULL,

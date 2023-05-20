@@ -51,6 +51,16 @@ type (
 		UpdatedAt    time.Time `json:"updated_at"`
 	}
 
+	AddHistory struct {
+		ID             string    `json:"id" binding:"required"`
+		Uid            string    `json:"uid" binding:"required"`
+		TotalKolestrol string    `json:"total_kolestrol" binding:"required"`
+		Tingkat        string    `json:"tingkat" binding:"required"`
+		ImageUrl       string    `json:"image_url" binding:"required"`
+		CreatedAt      time.Time `json:"created_at"`
+		UpdateAt       time.Time `json:"updated_at"`
+	}
+
 	UpdateArticle struct {
 		ID           string    `json:"id" binding:"required"`
 		AuthorID     string    `json:"author_id" binding:"required"`

@@ -21,7 +21,7 @@ func (d HTTPArtikelDelivery) deleteArticle(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, httpCommon.Response{
-		Message: "Article deleted successfully",
+		Message: "Article successfully deleted",
 	})
 }
 
@@ -50,7 +50,6 @@ func (d HTTPArtikelDelivery) updateArticle(c *gin.Context) {
 		c.Error(err)
 		return
 	}
-
 	c.JSON(http.StatusOK, httpCommon.Response{
 		Data:    nid,
 		Message: "Data successfully updated",

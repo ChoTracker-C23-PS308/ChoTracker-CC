@@ -3,25 +3,38 @@ package history
 import "time"
 
 type (
-	history struct {
+	AuthHistory struct {
+		ID   string
+		Role uint32
+	}
+
+	History struct {
 		ID             string
-		UID            string
+		Uid            string
 		TotalKolestrol string
 		Tingkat        string
 		ImageUrl       string
 		CreatedAt      time.Time
 		UpdatedAt      time.Time
+		ID_2           string
+		Name           string
+		Email          string
+		BirthDate      string
+		Gender         string
+		ImageUrl_2     string
+		CreatedAt_2    time.Time
+		UpdatedAt_2    time.Time
 	}
 
-	addHistory struct {
+	AddHistory struct {
 		ID             string
-		UID            string
+		Uid            string
 		TotalKolestrol string
 		Tingkat        string
 		ImageUrl       string
 	}
 
-	getHistory struct {
-		history []history
+	GetHistory struct {
+		history []History
 	}
 )

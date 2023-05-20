@@ -83,6 +83,51 @@ func (q *Queries) GetArticle(ctx context.Context, id string) (Article, error) {
 	return i, err
 }
 
+//Testing getAllArticles
+const getAllArticles = `-- name: GetAllArticles :many
+SELECT id
+     , author_id
+     , judul_article
+     , isi_article
+     , author
+     , image_url
+     , created_at
+     , updated_at
+FROM articles
+`
+
+func (q *Queries) GetAllArticles(ctx context.Context) ([]Article, error) {
+	rows, err := q.db.Query(ctx, getAllArticles)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var articles []Article
+	for rows.Next() {
+		var a Article
+		err := rows.Scan(
+			&a.ID,
+			&a.AuthorID,
+			&a.JudulArticle,
+			&a.IsiArticle,
+			&a.Author,
+			&a.ImageUrl,
+			&a.CreatedAt,
+			&a.UpdatedAt,
+		)
+		if err != nil {
+			return nil, err
+		}
+		articles = append(articles, a)
+	}
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+	return articles, nil
+}
+//Closing
+
 const updateArticle = `-- name: UpdateArticle :one
 UPDATE articles
 SET author_id        = $2

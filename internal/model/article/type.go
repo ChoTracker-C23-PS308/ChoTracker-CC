@@ -17,6 +17,7 @@ type (
 		CreatedAt    time.Time
 		UpdatedAt    time.Time
 	}
+
 	AddArticle struct {
 		ID           string
 		AuthorID     string

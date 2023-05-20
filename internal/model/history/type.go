@@ -9,9 +9,8 @@ type (
 		TotalKolestrol string
 		Tingkat        string
 		ImageUrl       string
-
-		CreatedAt time.Time
-		UpdatedAt time.Time
+		CreatedAt      time.Time
+		UpdatedAt      time.Time
 	}
 
 	addHistory struct {

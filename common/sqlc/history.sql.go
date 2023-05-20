@@ -121,7 +121,7 @@ SET uid                = $2
   , total_kolestrol    = $3
   , tingkat            = $4
   , image_url          = $5
-  , updated_at   = CURRENT_TIMESTAMP
+  , updated_at   	   = CURRENT_TIMESTAMP
 WHERE id = $1
     RETURNING id
 `

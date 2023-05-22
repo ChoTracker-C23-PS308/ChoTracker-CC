@@ -27,6 +27,7 @@ type (
 		Author       string
 		ImageUrl     string
 	}
+
 	UpdateArticle struct {
 		ID           string
 		AuthorID     string

@@ -78,6 +78,7 @@ func (d HTTPArtikelDelivery) addArticle(c *gin.Context) {
 		c.Error(err)
 		return
 	}
+
 	c.JSON(http.StatusCreated, httpCommon.Response{
 		Data:    nid,
 		Message: "Data successfully created",

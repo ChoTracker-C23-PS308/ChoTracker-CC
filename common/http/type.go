@@ -46,7 +46,7 @@ type (
 		JudulArtikel string    `json:"judul_artikel" binding:"required"`
 		IsiArtikel   string    `json:"isi_artikel" binding:"required"`
 		Author       string    `json:"author" binding:"required"`
-		ImageURL     string    `json:"image_url" binding:"required"`
+		ImageURL     string    `json:"image_url"  binding:"required"`
 		CreatedAt    time.Time `json:"created_at"`
 		UpdatedAt    time.Time `json:"updated_at"`
 	}

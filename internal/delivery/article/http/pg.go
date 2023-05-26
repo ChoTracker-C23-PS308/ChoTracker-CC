@@ -5,6 +5,7 @@ import (
 	aModel "github.com/ChoTracker-C23-PS308/ChoTracker-CC/internal/model/article"
 	uModel "github.com/ChoTracker-C23-PS308/ChoTracker-CC/internal/model/user"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"net/http"
 )
 
@@ -14,7 +15,7 @@ func (d HTTPArtikelDelivery) deleteArticle(c *gin.Context) {
 
 	id := c.Param("id")
 
-	err := d.articleRepo.DeleteArticle(context, id, aModel.AuthArticle(au))
+	err := d.articleRepo.DeleteArticle(context, id, au)
 	if err != nil {
 		c.Error(err)
 		return
@@ -45,7 +46,7 @@ func (d HTTPArtikelDelivery) updateArticle(c *gin.Context) {
 		Author:       article.Author,
 		ImageUrl:     article.ImageURL,
 		UpdatedAt:    article.UpdatedAt,
-	}, aModel.AuthArticle(au))
+	}, au)
 	if err != nil {
 		c.Error(err)
 		return
@@ -66,14 +67,21 @@ func (d HTTPArtikelDelivery) addArticle(c *gin.Context) {
 		return
 	}
 
+	// Generate id history
+	aid, err := uuid.NewRandom()
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
 	nid, err := d.articleRepo.CreateArticle(context, aModel.AddArticle{
-		ID:           article.ID,
+		ID:           aid.String(),
 		AuthorID:     article.AuthorID,
 		JudulArticle: article.JudulArtikel,
 		IsiArticle:   article.IsiArtikel,
 		Author:       article.Author,
 		ImageUrl:     article.ImageURL,
-	}, aModel.AuthArticle(au))
+	}, au)
 	if err != nil {
 		c.Error(err)
 		return
@@ -89,12 +97,12 @@ func (d HTTPArtikelDelivery) getAllArticles(c *gin.Context) {
 	context := c.Request.Context()
 	au := c.MustGet(httpCommon.AUTH_USER).(uModel.AuthUser)
 
-	u, err := d.articleRepo.GetAllArticles(context, aModel.AuthArticle(au))
+	u, err := d.articleRepo.GetAllArticles(context, au)
 	if err != nil {
 		c.Error(err)
 		return
 	}
-	c.JSON(http.StatusOK, httpCommon.Response{Data: u})
+	c.JSON(http.StatusOK, httpCommon.Response{Data: u, Message: "Get All History Succesfuly"})
 }
 
 func (d HTTPArtikelDelivery) getArticle(c *gin.Context) {
@@ -103,10 +111,10 @@ func (d HTTPArtikelDelivery) getArticle(c *gin.Context) {
 
 	id := c.Param("id")
 
-	u, err := d.articleRepo.GetArticle(context, id, aModel.AuthArticle(au))
+	u, err := d.articleRepo.GetArticle(context, id, au)
 	if err != nil {
 		c.Error(err)
 		return
 	}
-	c.JSON(http.StatusOK, httpCommon.Response{Data: u})
+	c.JSON(http.StatusOK, httpCommon.Response{Data: u, Message: "Get History Succesfuly"})
 }

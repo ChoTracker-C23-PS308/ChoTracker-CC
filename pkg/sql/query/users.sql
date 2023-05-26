@@ -26,7 +26,13 @@ SET name         = $2
   , email        = $3
   , birth_date   = $4
   , gender       = $5
-  , image_url       = $6
+  , updated_at   = CURRENT_TIMESTAMP
+WHERE id = $1
+    RETURNING id;
+
+-- name: UpdateUserImage :one
+UPDATE users
+SET image_url         = $2
   , updated_at   = CURRENT_TIMESTAMP
 WHERE id = $1
     RETURNING id;

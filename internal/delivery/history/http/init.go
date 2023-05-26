@@ -14,8 +14,8 @@ type HTTPHistoryDelivery struct {
 func NewHTTPHistoryDelivery(g *gin.RouterGroup, historyRepo hRepo.Repository, fauth *auth.Client) HTTPHistoryDelivery {
 	h := HTTPHistoryDelivery{historyRepo: historyRepo}
 
-	g.POST("/history", httpCommon.Auth(fauth), h.addHistory)
-	g.DELETE("/history/:id", httpCommon.Auth(fauth), h.deleteHistory)
+	g.POST("/history/:id", httpCommon.Auth(fauth), h.addHistory)
+	g.DELETE("/history/:uid/:id", httpCommon.Auth(fauth), h.deleteHistory)
 	g.GET("/history/:uid", httpCommon.Auth(fauth), h.getHistories)
 	return h
 

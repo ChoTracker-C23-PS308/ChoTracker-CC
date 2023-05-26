@@ -89,7 +89,6 @@ SET name         = $2
   , email        = $3
   , birth_date   = $4
   , gender       = $5
-  , image_url       = $6
   , updated_at   = CURRENT_TIMESTAMP
 WHERE id = $1
     RETURNING id
@@ -101,7 +100,6 @@ type UpdateUserParams struct {
 	Email     string `db:"email"`
 	BirthDate string `db:"birth_date"`
 	Gender    string `db:"gender"`
-	ImageUrl  string `db:"image_url"`
 }
 
 func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (string, error) {
@@ -111,8 +109,27 @@ func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (string,
 		arg.Email,
 		arg.BirthDate,
 		arg.Gender,
-		arg.ImageUrl,
 	)
+	var id string
+	err := row.Scan(&id)
+	return id, err
+}
+
+const updateUserImage = `-- name: UpdateUserImage :one
+UPDATE users
+SET image_url         = $2
+  , updated_at   = CURRENT_TIMESTAMP
+WHERE id = $1
+    RETURNING id
+`
+
+type UpdateUserImageParams struct {
+	ID       string `db:"id"`
+	ImageUrl string `db:"image_url"`
+}
+
+func (q *Queries) UpdateUserImage(ctx context.Context, arg UpdateUserImageParams) (string, error) {
+	row := q.db.QueryRow(ctx, updateUserImage, arg.ID, arg.ImageUrl)
 	var id string
 	err := row.Scan(&id)
 	return id, err

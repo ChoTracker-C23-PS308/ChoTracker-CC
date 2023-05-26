@@ -1,0 +1,7 @@
+# IDE files
+.idea
+
+.env
+.env.local
+
+configs/var/*.json

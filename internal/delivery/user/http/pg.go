@@ -31,7 +31,8 @@ func (d HTTPUserDelivery) addUser(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusCreated, httpCommon.Response{
-		Data: nid,
+		Data:    nid,
+		Message: "Create User Succesfuly",
 	})
 }
 
@@ -46,7 +47,7 @@ func (d HTTPUserDelivery) getUser(c *gin.Context) {
 		c.Error(err)
 		return
 	}
-	c.JSON(http.StatusOK, httpCommon.Response{Data: u})
+	c.JSON(http.StatusOK, httpCommon.Response{Data: u, Message: "Get user Succesfuly"})
 }
 
 func (d HTTPUserDelivery) updateUser(c *gin.Context) {
@@ -72,13 +73,38 @@ func (d HTTPUserDelivery) updateUser(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, httpCommon.Response{
-		Data: nid,
+		Data:    nid,
+		Message: "Update User Succesfuly",
 	})
 }
 
 func (d HTTPUserDelivery) uploadProfilePict(c *gin.Context) {
-	data := bucket.UploadBucketImage(c, "users-pict", "file")
-	c.JSON(http.StatusCreated, httpCommon.Response{
-		Data: data,
+	ctx := c.Request.Context()
+	au := c.MustGet(httpCommon.AUTH_USER).(uModel.AuthUser)
+
+	id := c.Param("id")
+
+	//imageUrl, err := d.bucketRepo.UploadBucketImage(c, "users-pict", id)
+	//fmt.Printf(imageUrl)
+	//if err != nil {
+	//	fmt.Println("disini")
+	//	c.Error(err)
+	//}
+
+	imageUrl := bucket.UploadBucketImage(c, "users-pict", id)
+
+	updateUserPic, err := d.userRepo.UpdateUserImage(ctx, uModel.UpdateUser{
+		ID:       id,
+		ImageUrl: imageUrl,
+	}, au)
+
+	if err != nil {
+		c.Error(err)
+	}
+
+	c.JSON(http.StatusOK, httpCommon.Response{
+		Data:    updateUserPic,
+		Message: "Update User picture Succesfuly",
 	})
+
 }

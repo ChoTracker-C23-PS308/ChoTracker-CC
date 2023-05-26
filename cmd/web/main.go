@@ -42,8 +42,6 @@ func main() {
 	//	panic(err)
 	//}
 
-	//uuid := uuid.NewRandom()
-
 	h := httpCommon.NewHTTPServer()
 	api := h.Router.Group("/api/v1", gin.Logger(), httpCommon.CORS())
 
@@ -58,5 +56,5 @@ func main() {
 	hr := hRepo.NewPGHistoryRepository(store.Querier)
 	hDelivery.NewHTTPHistoryDelivery(api, hr, fAuth)
 
-	log.Fatal(h.Router.Run(fmt.Sprintf(":%d", 4001)))
+	log.Fatal(h.Router.Run(fmt.Sprintf(":%d", config.Port)))
 }

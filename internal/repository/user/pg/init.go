@@ -53,16 +53,6 @@ func (r pgUserRepository) CreateUser(ctx context.Context, arg uModel.AddUser, au
 	return id, err
 }
 
-// // DeleteUser implements user.User
-//
-//	func (r pgUserRepository) DeleteUser(ctx context.Context, id string) error {
-//		err := r.querier.DeleteUser(ctx, id)
-//		if err == pgx.ErrNoRows {
-//			return errorCommon.NewNotFoundError("User not found")
-//		}
-//		return err
-//	}
-
 // GetUser implements user.User
 func (r pgUserRepository) GetUser(ctx context.Context, id string, au uModel.AuthUser) (uModel.User, error) {
 	if !au.IsSame(id) {
@@ -90,17 +80,6 @@ func (r pgUserRepository) VerifyAvailableUser(ctx context.Context, id string) (b
 	return true, nil
 }
 
-// // ListUsers implements user.User
-//
-//	func (r pgUserRepository) ListUsers(ctx context.Context) ([]uModel.User, error) {
-//		us, err := r.querier.ListUsers(ctx)
-//		ums := make([]uModel.User, 0)
-//		for _, u := range us {
-//			ums = append(ums, uModel.User(u))
-//		}
-//		return ums, err
-//	}
-//
 // UpdateUser implements user.User
 func (r pgUserRepository) UpdateUser(ctx context.Context, arg uModel.UpdateUser, au uModel.AuthUser) (string, error) {
 	if !au.IsSame(arg.ID) {
@@ -113,7 +92,22 @@ func (r pgUserRepository) UpdateUser(ctx context.Context, arg uModel.UpdateUser,
 		Email:     arg.Email,
 		BirthDate: arg.BirthDate,
 		Gender:    arg.Gender,
-		ImageUrl:  arg.ImageUrl,
+	})
+	if err == pgx.ErrNoRows {
+		return "", errorCommon.NewNotFoundError("User not found")
+	}
+	return id, err
+}
+
+// UpdateUser implements user.User
+func (r pgUserRepository) UpdateUserImage(ctx context.Context, arg uModel.UpdateUser, au uModel.AuthUser) (string, error) {
+	if !au.IsSame(arg.ID) {
+		return "", ErrCreateUser_UserNotAuthorized
+	}
+
+	id, err := r.querier.UpdateUserImage(ctx, sqlc.UpdateUserImageParams{
+		ID:       arg.ID,
+		ImageUrl: arg.ImageUrl,
 	})
 	if err == pgx.ErrNoRows {
 		return "", errorCommon.NewNotFoundError("User not found")
@@ -124,61 +118,3 @@ func (r pgUserRepository) UpdateUser(ctx context.Context, arg uModel.UpdateUser,
 func NewPGUserRepository(querier sqlc.Querier) pgUserRepository {
 	return pgUserRepository{querier: querier}
 }
-
-//// GetUserHistory implements BLM
-//func (r pgUserRepository) GetUserHistory(ctx context.Context, id string) ([]oModel.Order, error) {
-//	o, err := r.querier.GetOrderHistory(ctx, id)
-//	if err == pgx.ErrNoRows {
-//		var temp []oModel.Order
-//		return temp, errorCommon.NewNotFoundError("User not found")
-//	}
-//
-//	var oh []oModel.Order
-//
-//	for i := 0; i < len(o); i++ {
-//		d, err := r.querier.GetUser(ctx, o[i].UserID_2)
-//		if err == pgx.ErrNoRows {
-//			var temp []oModel.Order
-//			return temp, errorCommon.NewNotFoundError("Driver not found")
-//		}
-//
-//		oh = append(oh, oModel.Order{
-//			ID:    o[i].ID,
-//			DName: d.Name,
-//			User: uModel.User{
-//				ID:   o[i].UserID,
-//				Name: o[i].Name,
-//			},
-//			Driver: dModel.Driver{
-//				ID:           o[i].DriverID,
-//				PoliceNumber: o[i].PoliceNumber,
-//				VehicleModel: o[i].VehicleModel,
-//				VehicleType:  o[i].VehicleType,
-//			},
-//			OrderInquiry: oModel.OrderInquiry{
-//				ID:       o[i].OrderInquiryID,
-//				Price:    o[i].Price,
-//				Distance: o[i].Distance,
-//				Duration: o[i].Duration,
-//				Origin: oModel.Location{
-//					Address: o[i].OriginAddress,
-//				},
-//				Destination: oModel.Location{
-//					Address: o[i].DestinationAddress,
-//				},
-//				Routes: o[i].Routes,
-//			},
-//			Payment: pModel.Payment{
-//				ID:       o[i].PaymentID,
-//				Amount:   o[i].Amount,
-//				Status:   pModel.Status(o[i].Status_2),
-//				Method:   pModel.Method(o[i].Method),
-//				QrString: o[i].QrStr,
-//			},
-//			Status:    oModel.Status(o[i].Status),
-//			CreatedAt: o[i].CreatedAt,
-//			UpdatedAt: o[i].UpdatedAt,
-//		})
-//	}
-//
-//	return []oModel.Order(oh), err

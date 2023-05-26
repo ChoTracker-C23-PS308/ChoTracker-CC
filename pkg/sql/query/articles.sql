@@ -10,6 +10,17 @@ SELECT id
 FROM articles
 WHERE id = $1;
 
+-- name: GetAllArticle :many
+SELECT id
+     , author_id
+     , judul_article
+     , isi_article
+     , author
+     , image_url
+     , created_at
+     , updated_at
+FROM articles;
+
 -- name: CreateArticle :one
 INSERT INTO articles ( id
                      , author_id

@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 
-	cfg "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/config"
+	cfg "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/configs"
 	firebaseCommon "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/firebase/admin"
 	firebaseAuthCommon "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/firebase/auth"
 	httpCommon "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/http"
@@ -37,7 +37,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	//_, err = firebaseStgCommon.NewFirebaseStorage(app, config.BucketName)
+	//_, err = firebaseStgCommon.NewFirebaseStorage(app, configs.BucketName)
 	//if err != nil {
 	//	panic(err)
 	//}

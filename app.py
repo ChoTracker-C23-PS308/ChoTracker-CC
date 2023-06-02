@@ -5,11 +5,15 @@ import tensorflow as tf
 from predictcnn import Predict
 import cv2
 from predictregression import RegressionPredictor
+import os
 
 app = Flask(__name__)
 
-model_path_cnn = "D:\Tugas Kuliah\Tugas kuliah semester 6\Bangkit\Chotracker-CC-ModelAPI\model\model_weights.h5" # Size model Besar, Download model di trello
-model_path_regression = "D:\Tugas Kuliah\Tugas kuliah semester 6\Bangkit\Chotracker-CC-ModelAPI\model\\regression_model.h5"
+model_path_cnn = "model\model_weights.h5" # Size model Besar, Download model di trello
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+relative_path = "model/regression_model.h5"
+model_path_regression = os.path.join(current_dir, relative_path)
 
 @app.route("/api/v1/predict/regression", methods=['POST'])
 def predict_regression_image():

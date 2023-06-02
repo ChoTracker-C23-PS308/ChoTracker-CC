@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 
-	cfg "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/configs"
+	cfg "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/config"
 	firebaseCommon "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/firebase/admin"
 	firebaseAuthCommon "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/firebase/auth"
 	httpCommon "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/http"

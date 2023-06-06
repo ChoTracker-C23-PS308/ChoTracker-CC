@@ -2,6 +2,7 @@ package http
 
 import (
 	httpCommon "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/http"
+	bucket "github.com/ChoTracker-C23-PS308/ChoTracker-CC/internal/delivery/bucket/http"
 	hModel "github.com/ChoTracker-C23-PS308/ChoTracker-CC/internal/model/history"
 	uModel "github.com/ChoTracker-C23-PS308/ChoTracker-CC/internal/model/user"
 	"github.com/gin-gonic/gin"
@@ -20,6 +21,21 @@ func (d HTTPHistoryDelivery) getHistories(c *gin.Context) {
 		c.Error(err)
 		return
 	}
+
+	//var uhist []httpCommon.GetAllHistory
+	//
+	//for i := 0; i < len(uhist); i++ {
+	//	uhist = append(uhist, httpCommon.GetAllHistory{
+	//		ID:             u[i].ID,
+	//		UID:            u[i].Uid,
+	//		TotalKolestrol: u[i].TotalKolestrol,
+	//		Tingkat:        u[i].Tingkat,
+	//		ImageURL:       u[i].ImageUrl,
+	//		CreatedAt:      u[i].CreatedAt,
+	//		UpdatedAt:      u[i].UpdatedAt,
+	//	})
+	//}
+
 	c.JSON(http.StatusOK, httpCommon.Response{
 		Data:    u,
 		Message: "Get Histoies Data successfully",
@@ -32,7 +48,6 @@ func (d HTTPHistoryDelivery) addHistory(c *gin.Context) {
 
 	// Generate id history
 	hid, err := uuid.NewRandom()
-
 	if err != nil {
 		c.Error(err)
 	}
@@ -77,4 +92,27 @@ func (d HTTPHistoryDelivery) deleteHistory(c *gin.Context) {
 	c.JSON(http.StatusOK, httpCommon.Response{Data: id,
 		Message: "History successfully deleted",
 	})
+}
+
+func (d HTTPHistoryDelivery) addImage(c *gin.Context) {
+
+	id := c.Param("id")
+
+	// Generate id history
+	hid, err := uuid.NewRandom()
+	if err != nil {
+		c.Error(err)
+		return
+	}
+	imageUrl, err := bucket.UploadBucketImage(c, "history-pict", id+"-"+hid.String())
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	c.JSON(http.StatusOK, httpCommon.Response{
+		Data:    imageUrl,
+		Message: "Image Upload Succesfuly",
+	})
+
 }

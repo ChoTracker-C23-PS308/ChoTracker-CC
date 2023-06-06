@@ -84,14 +84,14 @@ func (d HTTPUserDelivery) uploadProfilePict(c *gin.Context) {
 
 	id := c.Param("id")
 
-	//imageUrl, err := d.bucketRepo.UploadBucketImage(c, "users-pict", id)
-	//fmt.Printf(imageUrl)
-	//if err != nil {
-	//	fmt.Println("disini")
-	//	c.Error(err)
-	//}
-
-	imageUrl := bucket.UploadBucketImage(c, "users-pict", id)
+	imageUrl, err := bucket.UploadBucketImage(c, "users-pict", id)
+	if err != nil {
+		c.Error(err)
+		c.JSON(http.StatusBadRequest, httpCommon.Error{
+			Message: "No Such File",
+		})
+		return
+	}
 
 	updateUserPic, err := d.userRepo.UpdateUserImage(ctx, uModel.UpdateUser{
 		ID:       id,
@@ -100,6 +100,7 @@ func (d HTTPUserDelivery) uploadProfilePict(c *gin.Context) {
 
 	if err != nil {
 		c.Error(err)
+		return
 	}
 
 	c.JSON(http.StatusOK, httpCommon.Response{

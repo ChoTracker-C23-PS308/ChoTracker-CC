@@ -15,6 +15,7 @@ func NewHTTPHistoryDelivery(g *gin.RouterGroup, historyRepo hRepo.Repository, fa
 	h := HTTPHistoryDelivery{historyRepo: historyRepo}
 
 	g.POST("/history/:id", httpCommon.Auth(fauth), h.addHistory)
+	g.POST("/history/:id/image", httpCommon.Auth(fauth), h.addImage)
 	g.DELETE("/history/:uid/:id", httpCommon.Auth(fauth), h.deleteHistory)
 	g.GET("/history/:uid", httpCommon.Auth(fauth), h.getHistories)
 	return h

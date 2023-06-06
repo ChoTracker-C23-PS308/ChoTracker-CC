@@ -59,6 +59,16 @@ type (
 		UpdateAt       time.Time `json:"updated_at"`
 	}
 
+	GetAllHistory struct {
+		ID             string    `json:"id"`
+		UID            string    `json:"uid"`
+		TotalKolestrol string    `json:"total_kolestrol"`
+		Tingkat        string    `json:"tingkat"`
+		ImageURL       string    `json:"image_url"`
+		CreatedAt      time.Time `json:"created_at"`
+		UpdatedAt      time.Time `json:"updated_at"`
+	}
+
 	UpdateArticle struct {
 		ID           string    `json:"id" binding:"required"`
 		AuthorID     string    `json:"author_id" binding:"required"`

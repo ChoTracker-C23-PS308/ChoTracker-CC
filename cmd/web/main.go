@@ -25,14 +25,10 @@ func main() {
 	//store := pgCommon.New("postgres://dev_user:dev_password@db:5432/dev_database?sslmode=disable")
 	defer store.Db.Close()
 
-	app, err := firebaseCommon.NewFirebaseAdmin(config.CredentialType, config.CredentialValue)
+	app, err := firebaseCommon.NewFirebaseAdmin(config.Firebase.CredentialType, config.Firebase.CredentialValue)
 	if err != nil {
 		panic(err)
 	}
-	//app, err := firebaseCommon.NewFirebaseAdmin("json", "configs/var/chotracker-c23-ps308-firebase-adminsdk-akrc3-a53cb2d6ef.json")
-	//if err != nil {
-	//	panic(err)
-	//}
 	fAuth, err := firebaseAuthCommon.NewFirebaseAuth(app)
 	if err != nil {
 		panic(err)

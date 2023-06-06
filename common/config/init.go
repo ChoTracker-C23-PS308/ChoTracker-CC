@@ -7,14 +7,18 @@ type (
 		Port        int    `env:"PORT,unset" envDefault:"4001"`
 		DatabaseURL string `env:"DATABASE_URL,unset"`
 		//GMapAPIKey      string `env:"GMAP_API_KEY,unset"`
-
+		Bucket
 		Firebase
 	}
 
 	Firebase struct {
 		CredentialType  string `env:"FIREBASE_CREDENTIAL_TYPE,unset"`
 		CredentialValue string `env:"FIREBASE_CREDENTIAL_VALUE,unset"`
-		//BucketName      string `env:"FIREBASE_STORAGE_BUCKET,unset"`
+	}
+
+	Bucket struct {
+		Name            string `env:"STORAGE_BUCKET_NAME,unset"`
+		CredentialValue string `env:"STORAGE_BUCKET_CREDENTIAL_VALUE,unset"`
 	}
 )
 

@@ -30,10 +30,10 @@ def predict_regression_image():
 
         predictor = RegressionPredictor(model_path_regression)
         prediction_result = predictor.predict(image)
-
+        rounded_value = "{:.2f}".format(prediction_result)
         response = {
             'message': 'File successfully received and processed',
-            'prediction': float(prediction_result)
+            'prediction': rounded_value
         }
         return jsonify(response), 200
 

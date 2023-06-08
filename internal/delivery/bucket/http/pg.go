@@ -16,9 +16,8 @@ const (
 func UploadBucketImage(c *gin.Context, bucketFolder string, image string) (string, error) {
 	//config := cfg.LoadConfig()
 	file, err := c.FormFile("file")
-
 	if err != nil {
-		return fmt.Sprintf("%s", c.Error(err)), err
+		return "", err
 	}
 	gcsname := fmt.Sprintf("%s/%s", bucketFolder, image)
 	ctx := c.Request.Context()
@@ -26,7 +25,7 @@ func UploadBucketImage(c *gin.Context, bucketFolder string, image string) (strin
 	client, err := storage.NewClient(ctx, option.WithCredentialsFile(PATHKEY))
 	//client, err := storage.NewClient(ctx, option.WithCredentialsFile(config.Bucket.CredentialValue))
 	if err != nil {
-		return fmt.Sprintf("%s", c.Error(err)), err
+		return "", err
 	}
 	defer client.Close()
 
@@ -39,7 +38,7 @@ func UploadBucketImage(c *gin.Context, bucketFolder string, image string) (strin
 
 	uploadedFile, err := file.Open()
 	if err != nil {
-		return fmt.Sprintf("%s", c.Error(err)), err
+		return "", err
 	}
 
 	if _, err := io.Copy(wc, uploadedFile); err != nil {
@@ -47,7 +46,7 @@ func UploadBucketImage(c *gin.Context, bucketFolder string, image string) (strin
 	}
 
 	if err := wc.Close(); err != nil {
-		return fmt.Sprintf("%s", c.Error(err)), err
+		return "", err
 	}
 
 	url := fmt.Sprintf("https://storage.googleapis.com/%s/%s", BUCKET_NAME, gcsname)

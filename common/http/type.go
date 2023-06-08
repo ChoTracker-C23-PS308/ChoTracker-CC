@@ -52,7 +52,7 @@ type (
 
 	AddHistory struct {
 		Uid            string    `json:"uid" binding:"required"`
-		TotalKolestrol string    `json:"total_kolestrol" binding:"required"`
+		TotalKolestrol float64   `json:"total_kolestrol" binding:"required"`
 		Tingkat        string    `json:"tingkat" binding:"required"`
 		ImageUrl       string    `json:"image_url" binding:"required"`
 		CreatedAt      time.Time `json:"created_at"`

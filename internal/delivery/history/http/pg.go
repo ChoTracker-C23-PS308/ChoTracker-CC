@@ -1,6 +1,7 @@
 package http
 
 import (
+	"fmt"
 	httpCommon "github.com/ChoTracker-C23-PS308/ChoTracker-CC/common/http"
 	bucket "github.com/ChoTracker-C23-PS308/ChoTracker-CC/internal/delivery/bucket/http"
 	hModel "github.com/ChoTracker-C23-PS308/ChoTracker-CC/internal/model/history"
@@ -8,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"net/http"
+	"strconv"
 )
 
 func (d HTTPHistoryDelivery) getHistories(c *gin.Context) {
@@ -22,19 +24,19 @@ func (d HTTPHistoryDelivery) getHistories(c *gin.Context) {
 		return
 	}
 
-	//var uhist []httpCommon.GetAllHistory
-	//
-	//for i := 0; i < len(uhist); i++ {
-	//	uhist = append(uhist, httpCommon.GetAllHistory{
-	//		ID:             u[i].ID,
-	//		UID:            u[i].Uid,
-	//		TotalKolestrol: u[i].TotalKolestrol,
-	//		Tingkat:        u[i].Tingkat,
-	//		ImageURL:       u[i].ImageUrl,
-	//		CreatedAt:      u[i].CreatedAt,
-	//		UpdatedAt:      u[i].UpdatedAt,
-	//	})
-	//}
+	var uhist []httpCommon.GetAllHistory
+
+	for i := 0; i < len(u); i++ {
+		uhist = append(uhist, httpCommon.GetAllHistory{
+			ID:             u[i].ID,
+			UID:            u[i].Uid,
+			TotalKolestrol: u[i].TotalKolestrol,
+			Tingkat:        u[i].Tingkat,
+			ImageURL:       u[i].ImageUrl,
+			CreatedAt:      u[i].CreatedAt,
+			UpdatedAt:      u[i].UpdatedAt,
+		})
+	}
 
 	c.JSON(http.StatusOK, httpCommon.Response{
 		Data:    u,
@@ -49,24 +51,29 @@ func (d HTTPHistoryDelivery) addHistory(c *gin.Context) {
 	// Generate id history
 	hid, err := uuid.NewRandom()
 	if err != nil {
+		fmt.Print(err)
 		c.Error(err)
 	}
 
 	var history httpCommon.AddHistory
 	if err := c.ShouldBindJSON(&history); err != nil {
+		fmt.Print(err)
 		c.Error(err).SetType(gin.ErrorTypeBind)
 		return
 	}
 
+	totalKol := strconv.FormatFloat(history.TotalKolestrol, 'f', -1, 64)
+
 	nid, err := d.historyRepo.CreateHistory(context, hModel.AddHistory{
 		ID:             hid.String(),
 		Uid:            history.Uid,
-		TotalKolestrol: history.TotalKolestrol,
+		TotalKolestrol: totalKol,
 		Tingkat:        history.Tingkat,
 		ImageUrl:       history.ImageUrl,
 	}, au)
 
 	if err != nil {
+		fmt.Print(err)
 		c.Error(err)
 		return
 	}

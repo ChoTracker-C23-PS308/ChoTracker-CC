@@ -4,8 +4,7 @@ import numpy as np
 import tensorflow as tf
 from predictcnn import Predict
 from predictregression import RegressionPredictor
-from predictchobot import chat
-# from predict import chat
+from predictchobot import predict_intent
 import cv2
 import tflearn
 import os
@@ -28,7 +27,7 @@ def predict_chatbot():
         if 'text' not in request.json:
             return jsonify({'message': 'Text input not provided'}), 400
         text = request.json['text']
-        response = chat(text)
+        response = predict_intent(text)
         return jsonify({'message': response}), 200
 
 @app.route("/api/v1/predict/regression", methods=['POST'])

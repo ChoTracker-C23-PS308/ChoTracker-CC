@@ -3,17 +3,33 @@ from PIL import Image
 import numpy as np
 import tensorflow as tf
 from predictcnn import Predict
-import cv2
 from predictregression import RegressionPredictor
+from predictchobot import chat
+# from predict import chat
+import cv2
+import tflearn
+import os
 import os
 
 app = Flask(__name__)
 
-model_path_cnn = "model\model_weights.h5" # Size model Besar, Download model di trello
+current_dir = os.path.abspath(__file__)  
+parent_dir = os.path.dirname(os.path.dirname(current_dir))  
+target_dir = os.path.join(parent_dir, "Chotracker-CC-ModelAPI/model")
+target_dir_chobot = os.path.join(parent_dir, "Chotracker-CC-ModelAPI/model_chobot")
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-relative_path = "model/regression_model.h5"
-model_path_regression = os.path.join(current_dir, relative_path)
+# Model path
+model_path_regression = os.path.join(target_dir, "regression_model.h5") 
+# model_path_cnn = os.path.join(target_dir, "model_weights.h5")  # Size model Besar, Download model di trello
+
+@app.route("/api/v1/predict/chobot", methods=['POST'])
+def predict_chatbot():
+    if request.method == 'POST':
+        if 'text' not in request.json:
+            return jsonify({'message': 'Text input not provided'}), 400
+        text = request.json['text']
+        response = chat(text)
+        return jsonify({'message': response}), 200
 
 @app.route("/api/v1/predict/regression", methods=['POST'])
 def predict_regression_image():

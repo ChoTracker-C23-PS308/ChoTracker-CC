@@ -24,9 +24,17 @@ func (d HTTPHistoryDelivery) getHistories(c *gin.Context) {
 		return
 	}
 
+	if len(u) <= 0 {
+		c.JSON(http.StatusOK, httpCommon.Response{
+			Data:    u,
+			Message: "History is empty",
+		})
+		return
+	}
+
 	var uhist []httpCommon.GetAllHistory
 
-	for i := 0; i < len(u); i++ {
+	for i := len(u) - 1; i >= 0; i-- {
 		uhist = append(uhist, httpCommon.GetAllHistory{
 			ID:             u[i].ID,
 			UID:            u[i].Uid,
@@ -39,7 +47,7 @@ func (d HTTPHistoryDelivery) getHistories(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, httpCommon.Response{
-		Data:    u,
+		Data:    uhist,
 		Message: "Get Histoies Data successfully",
 	})
 }

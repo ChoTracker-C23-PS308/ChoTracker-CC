@@ -14,9 +14,18 @@ This documentation provides an overview of the available routes and endpoints fo
     - Authorization: Bearer <Firebase Token>
 - **JSON Response**:
     ```json
-    {
-        "data": "{json data}",
-        "message": "Message"
+   {
+   "data": {
+        "ID": "biuEuWM6ZRZberSsf9padC5n3u73",
+        "Name": "Alif Toriq",
+        "Email": "aliftoriq52@student.unsri.ac.id",
+        "BirthDate": "30 Agustus 2002",
+        "Gender": "Laki - Laki",
+        "ImageUrl": "https://storage.googleapis.com/dev-chotracker-image/users-pict/biuEuWM6ZRZberSsf9padC5n3u73",
+        "CreatedAt": "2023-05-19T01:14:44.862103Z",
+        "UpdatedAt": "2023-06-08T21:23:50.475154Z"
+    },
+    "message": "Get user Succesfuly"
     }
     ```
 
@@ -41,18 +50,9 @@ This documentation provides an overview of the available routes and endpoints fo
 - **JSON Response**:
     ```json
     {
-    "data": {
-        "ID": "uid",
-        "Name": "user name",
-        "Email": "email@gmail.com",
-        "BirthDate": "20 - 08 - 2000",
-        "Gender": "Laki-Laki/Perempuan",
-        "ImageUrl": "https://storage.googleapis.com/dev-chotracker-image/users-pict/{{userid}}}}",
-        "CreatedAt": "2023-05-19T01:14:44.862103Z",
-        "UpdatedAt": "2023-05-26T21:19:22.141192Z"
-    },
-    "message": "Get user Succesfuly"
-}
+       "data": "SNvNGLEt86c90yjXSAOeWagwDos2",
+       "message": "Create User Succesfuly"
+    }
     ```
 
 ### Update User
@@ -244,8 +244,8 @@ This documentation provides an overview of the available routes and endpoints fo
 - **JSON Response**:
     ```json
     {
-        "data": "{json data}",
-        "message": "Message"
+        "data": "{{hid}}",
+        "message": "History successfully deleted"
     }
     ```
 
@@ -260,22 +260,31 @@ This documentation provides an overview of the available routes and endpoints fo
     {
       "data": [
           {
-            "ID": "history id",
-            "Uid": "user id",
-            "TotalKolestrol": "xxx.xxxx",
-            "Tingkat": "high/normal",
-            "ImageUrl": "https://storage.googleapis.com/dev-chotracker-image/users-pict/...",
-            "CreatedAt": "2023-05-24T16:55:46.409322Z",
-            "UpdatedAt": "2023-05-24T16:55:46.409322Z"
+            "id": "history id",
+            "uid": "user id",
+            "total_olestrol": "xxx.xxxx",
+            "tingkat": "high/normal",
+            "image_url": "https://storage.googleapis.com/dev-chotracker-image/users-pict/...",
+            "created_at": "2023-05-24T16:55:46.409322Z",
+            "updated_at": "2023-05-24T16:55:46.409322Z"
           }, 
           {
-            "ID": "history id",
-            "Uid": "user id",
-            "TotalKolestrol": "xxx.xxxx",
-            "Tingkat": "high/normal",
-            "ImageUrl": "https://storage.googleapis.com/dev-chotracker-image/users-pict/...",
-            "CreatedAt": "2023-05-24T16:55:46.409322Z",
-            "UpdatedAt": "2023-05-24T16:55:46.409322Z"
+            "id": "history id",
+            "uid": "user id",
+            "total_olestrol": "xxx.xxxx",
+            "tingkat": "high/normal",
+            "image_url": "https://storage.googleapis.com/dev-chotracker-image/users-pict/...",
+            "created_at": "2023-05-24T16:55:46.409322Z",
+            "updated_at": "2023-05-24T16:55:46.409322Z"
+          }, 
+  {
+            "id": "history id",
+            "uid": "user id",
+            "total_olestrol": "xxx.xxxx",
+            "tingkat": "high/normal",
+            "image_url": "https://storage.googleapis.com/dev-chotracker-image/users-pict/...",
+            "created_at": "2023-05-24T16:55:46.409322Z",
+            "updated_at": "2023-05-24T16:55:46.409322Z"
           }]
       ,"message": "Get Histoies Data successfully"
     }

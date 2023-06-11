@@ -16,14 +16,14 @@ This documentation provides an overview of the available routes and endpoints fo
     ```json
    {
    "data": {
-        "ID": "biuEuWM6ZRZberSsf9padC5n3u73",
-        "Name": "Alif Toriq",
-        "Email": "aliftoriq52@student.unsri.ac.id",
-        "BirthDate": "30 Agustus 2002",
-        "Gender": "Laki - Laki",
-        "ImageUrl": "https://storage.googleapis.com/dev-chotracker-image/users-pict/biuEuWM6ZRZberSsf9padC5n3u73",
-        "CreatedAt": "2023-05-19T01:14:44.862103Z",
-        "UpdatedAt": "2023-06-08T21:23:50.475154Z"
+        "id": "user id",
+        "name": "user name",
+        "email": "user@gmail.com",
+        "birth_date": "22 august 2022",
+        "gender": "Laki-Laki/Perempuan",
+        "image_url": "https://storage.googleapis.com/dev-chotracker-image/users-pict/{{uid}}}}",
+        "created_at": "2023-05-19T01:14:44.862103Z",
+        "updated_at": "2023-06-08T21:23:50.475154Z"
     },
     "message": "Get user Succesfuly"
     }
@@ -38,19 +38,18 @@ This documentation provides an overview of the available routes and endpoints fo
 - **JSON Request**:
     ```json
     {
-        "id": "{{user_id}}",
+        "id": "{{user_id from firebase}}",
         "name": "Alif Toriq",
         "email": "09021182025016@student.unsri.ac.id",
         "phone_number": "no telp",
         "birth_date": "birthdate",
-        "gender": "Laki-Laki/Perempuan",
-        "image_url": "image.url/user.jpeg"
+        "gender": "Laki-Laki/Perempuan"
     }
     ```
 - **JSON Response**:
     ```json
     {
-       "data": "SNvNGLEt86c90yjXSAOeWagwDos2",
+       "data": "uid",
        "message": "Create User Succesfuly"
     }
     ```
@@ -119,7 +118,8 @@ This documentation provides an overview of the available routes and endpoints fo
 - **JSON Response**:
     ```json
     {
-       "data": {
+       "data": [
+       {
            "ID": "articleid",
            "AuthorID": "userid",
            "JudulArticle": "Chotracker untuk masa depan",
@@ -129,6 +129,16 @@ This documentation provides an overview of the available routes and endpoints fo
            "CreatedAt": "2023-06-07T21:58:53.4652Z",
            "UpdatedAt": "2023-06-07T21:58:53.4652Z"
        },
+       {
+           "ID": "articleid",
+           "AuthorID": "userid",
+           "JudulArticle": "Chotracker untuk masa depan",
+           "IsiArticle": "Ini adalah bagian dari isi article",
+           "Author": "author name",
+           "ImageUrl": "https://storage.googleapis.com/dev-chotracker-image/users-pict/...",
+           "CreatedAt": "2023-06-07T21:58:53.4652Z",
+           "UpdatedAt": "2023-06-07T21:58:53.4652Z"
+       }],
        "message": "Get Article Succesfuly"
     }
   ```

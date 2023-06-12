@@ -22,7 +22,6 @@ func main() {
 
 	config := cfg.LoadConfig()
 	store := pgCommon.New(config.DatabaseURL)
-	//store := pgCommon.New("postgres://dev_user:dev_password@db:5432/dev_database?sslmode=disable")
 	defer store.Db.Close()
 
 	app, err := firebaseCommon.NewFirebaseAdmin(config.Firebase.CredentialType, config.Firebase.CredentialValue)
@@ -33,10 +32,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	//_, err = firebaseStgCommon.NewFirebaseStorage(app, configs.BucketName)
-	//if err != nil {
-	//	panic(err)
-	//}
 
 	h := httpCommon.NewHTTPServer()
 	api := h.Router.Group("/api/v1", gin.Logger(), httpCommon.CORS())

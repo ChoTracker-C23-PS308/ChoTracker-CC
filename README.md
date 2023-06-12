@@ -39,9 +39,9 @@ This documentation provides an overview of the available routes and endpoints fo
     ```json
     {
         "id": "{{user_id from firebase}}",
-        "name": "Alif Toriq",
-        "email": "09021182025016@student.unsri.ac.id",
-        "phone_number": "no telp",
+        "name": "User name",
+        "email": "user@gmail.com",  
+        "phone_number": "08225730xxxx",
         "birth_date": "birthdate",
         "gender": "Laki-Laki/Perempuan"
     }
@@ -225,7 +225,7 @@ This documentation provides an overview of the available routes and endpoints fo
 - **JSON Response**:
     ```json
     {
-        "data": "35784ea0-d7ad-4b19-8273-7ed5a223859c",
+        "data": "history id",
         "message": "Data successfully created"
     }
     ```

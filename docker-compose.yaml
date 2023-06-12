@@ -9,7 +9,7 @@ services:
     ports:
       - "4001:4001"
     volumes:
-      - ./configs/var:/var/mangjek-be
+      - ./configs/var:/var/Chotracker-CC
     env_file:
       - .env.local
     environment:

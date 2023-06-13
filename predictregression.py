@@ -41,11 +41,11 @@ class RegressionPredictor:
 
 #     def preprocess_image(self, image):
 #         np_image = np.array(image)
-        # gray_image = cv2.cvtColor(np_image, cv2.COLOR_BGR2GRAY)
-        # resized_image = cv2.resize(gray_image, (100, 100))
-        # radius = 3
-        # n_points = 8 * radius
-        # lbp = local_binary_pattern(resized_image, n_points, radius, method='uniform')
+#         gray_image = cv2.cvtColor(np_image, cv2.COLOR_BGR2GRAY)
+#         resized_image = cv2.resize(gray_image, (100, 100))
+#         radius = 3
+#         n_points = 8 * radius
+#         lbp = local_binary_pattern(resized_image, n_points, radius, method='uniform')
 #         histogram, _ = np.histogram(lbp.ravel(), bins=np.arange(0, n_points + 3), range=(0, n_points + 2))
 #         feature = np.reshape(histogram, (1, -1))
         

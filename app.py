@@ -8,7 +8,7 @@ from predictchobot import predict_intent
 import cv2
 import tflearn
 import os
-import os
+
 
 app = Flask(__name__)
 

@@ -13,13 +13,13 @@ This documentation provides an overview and instructions for running a RESTful A
 
 ### Setup Instructions
 
-1. Clone the repository from the [GitHub repository link]([https://github.com/your-repo-link](https://github.com/ChoTracker-C23-PS308/ChoTracker-CC)).
+1. Clone the repository from the [GitHub repository link]([https://github.com/your-repo-link](https://github.com/ChoTracker-C23-PS308/ChoTracker-CC)) main branch.
 2. Ensure that the Postgres database server is running locally. If not, please install and set it up accordingly.
 3. Install the required dependencies by running the following command in the project directory:
    ```
    go mod download
    ```
-4.  
+4. Get The credentials.json service account for cloud storage and firebase
 5. Create a `.env` file in the project directory and provide the necessary environment variables :
    ```
    PORT=4001

@@ -5,7 +5,7 @@ This documentation provides an overview and instructions for running a RESTful A
 ### Prerequisites
 - Golang installed on your local machine
 - Postgres database server running locally (if running locally)
-- - Setting Up Google Cloud Service (Firebase, Cloud Storage and Cloud SQL[if will deployed])
+- Setting Up Google Cloud Service (Firebase, Cloud Storage and Cloud SQL[if will deployed])
 - Docker installed (if running with Docker)
 - Sqlc installed (if will generate new schema and query)
 - MinGw Make (if want instant command run and others)
@@ -31,12 +31,12 @@ This documentation provides an overview and instructions for running a RESTful A
    DB_PASSWORD=mypassword
    
    FIREBASE_CREDENTIAL_TYPE=file
-    FIREBASE_CREDENTIAL_VALUE=configs/var/credentials.json
+   FIREBASE_CREDENTIAL_VALUE=configs/var/credentials.json
 
-    STORAGE_BUCKET_NAME=bucket_name
-    STORAGE_BUCKET_CREDENTIAL_VALUE=configs/var/credential.json
+   STORAGE_BUCKET_NAME=bucket_name
+   STORAGE_BUCKET_CREDENTIAL_VALUE=configs/var/credential.json
     
-    DATABASE_URL=postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?sslmode=disable
+   DATABASE_URL=postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?sslmode=disable
    ```
 6. Migrate schema to database command:
    ```
@@ -53,9 +53,9 @@ This documentation provides an overview and instructions for running a RESTful A
    // docker build 
    docker build -t nama_image:tag 
    docker run -p 4001:4001 -d nama_image:tag
-
    ```
-   The API should now be running on `http://localhost:8080`.
+   The API should now be running on `http://localhost:4001`.
+
 
 
 This an overview of the available routes and endpoints for the RESTful API. The API requires authentication using a Firebase token, which should be included in the `Authorization` header of the request.

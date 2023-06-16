@@ -13,7 +13,7 @@ This documentation provides an overview and instructions for running a RESTful A
 
 ### Setup Instructions
 
-1. Clone the repository from the [GitHub repository link][https://github.com/ChoTracker-C23-PS308/ChoTracker-CC] main branch.
+1. Clone the repository from the [ChoTracker CC Repo](https://github.com/ChoTracker-C23-PS308/ChoTracker-CC) main branch.
 2. Ensure that the Postgres database server is running locally. If not, please install and set it up accordingly.
 3. Install the required dependencies by running the following command in the project directory:
    ```

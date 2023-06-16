@@ -1,6 +1,64 @@
 # ChoTracker-CC RESTful API Documentation
 
-This documentation provides an overview of the available routes and endpoints for the RESTful API. The API requires authentication using a Firebase token, which should be included in the `Authorization` header of the request.
+This documentation provides an overview and instructions for running a RESTful API built with Golang. The API can be executed locally using a local Postgres database server or by building a container image with Docker using the provided Dockerfile.
+
+### Prerequisites
+- Golang installed on your local machine
+- Postgres database server running locally (if running locally)
+- - Setting Up Google Cloud Service (Firebase, Cloud Storage and Cloud SQL[if will deployed])
+- Docker installed (if running with Docker)
+- Sqlc installed (if will generate new schema and query)
+- MinGw Make (if want instant command run and others)
+- Migrate (if want migrate schema automaticly)
+
+### Setup Instructions
+
+1. Clone the repository from the [GitHub repository link]([https://github.com/your-repo-link](https://github.com/ChoTracker-C23-PS308/ChoTracker-CC)).
+2. Ensure that the Postgres database server is running locally. If not, please install and set it up accordingly.
+3. Install the required dependencies by running the following command in the project directory:
+   ```
+   go mod download
+   ```
+4.  
+5. Create a `.env` file in the project directory and provide the necessary environment variables :
+   ```
+   PORT=4001
+   
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_NAME=mydatabase
+   DB_USER=myuser
+   DB_PASSWORD=mypassword
+   
+   FIREBASE_CREDENTIAL_TYPE=file
+    FIREBASE_CREDENTIAL_VALUE=configs/var/credentials.json
+
+    STORAGE_BUCKET_NAME=bucket_name
+    STORAGE_BUCKET_CREDENTIAL_VALUE=configs/var/credential.json
+    
+    DATABASE_URL=postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?sslmode=disable
+   ```
+6. Migrate schema to database command:
+   ```
+   // using make mingw command
+   make migrate-up
+   // using migrate command
+   migrate -source file://${DATABASE_MIGRATIONS_PATH} -database ${DATABASE_URL} up
+   ```
+8. Run the API locally using the following command:
+   ```
+   // using make mingw command - run locally
+   make run3
+   
+   // docker build 
+   docker build -t nama_image:tag 
+   docker run -p 4001:4001 -d nama_image:tag
+
+   ```
+   The API should now be running on `http://localhost:8080`.
+
+
+This an overview of the available routes and endpoints for the RESTful API. The API requires authentication using a Firebase token, which should be included in the `Authorization` header of the request.
 
 **Base Url :** `https://baseurl` + `/api/v1`
 
